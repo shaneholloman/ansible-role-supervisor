@@ -1,6 +1,6 @@
 # Ansible Role: Supervisor
 
-[![CI](https://github.com/shaneholloman-org/ansible-role-supervisor/actions/workflows/ci.yml/badge.svg)](https://github.com/shaneholloman-org/ansible-role-supervisor/actions/workflows/ci.yml)
+[![CI](https://github.com/shaneholloman/ansible-role-supervisor/actions/workflows/ci.yml/badge.svg)](https://github.com/shaneholloman/ansible-role-supervisor/actions/workflows/ci.yml)
 
 An Ansible Role that installs [Supervisor](http://supervisord.org/) on Linux.
 
@@ -29,7 +29,7 @@ The path where Supervisor configuration should be stored.
       - name: 'foo'
         command: /bin/cat
         state: present
-    
+
       - name: 'apache'
         command: apache2ctl -DFOREGROUND
         state: present
@@ -99,4 +99,3 @@ MIT / BSD
 ## Author Information
 
 This role was created in 2023
-

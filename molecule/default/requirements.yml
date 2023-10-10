@@ -1,2 +1,3 @@
 ---
-- src: shaneholloman.pip
+- name: shaneholloman.pip
+  src: https://github.com/shaneholloman/ansible-role-pip
