@@ -1,6 +1,6 @@
 ---
 name: Close inactive issues
-'on':
+on:
   schedule:
     - cron: "55 6 * * 5"  # semi-random time
 
