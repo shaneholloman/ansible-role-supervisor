@@ -12,30 +12,30 @@
 
   pre_tasks:
     - name: Update apt cache (Debian).
-      apt: update_cache=true cache_valid_time=600
+      ansible.builtin.apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
     # Install curl for test purposes.
     - name: Install curl for testing purposes.
-      package: name=curl state=present
+      ansible.builtin.package: name=curl state=present
 
     # Install Apache for test purposes.
     - block:
         - name: Install Apache (RedHat).
-          package: name=httpd state=present
+          ansible.builtin.package: name=httpd state=present
         - name: Ensure Apache is not running (RedHat).
-          service: name=httpd state=stopped enabled=no
+          ansible.builtin.service: name=httpd state=stopped enabled=no
       when: ansible_os_family == 'RedHat'
 
     - block:
         - name: Install Apache (Debian).
-          package: name=apache2 state=present
+          ansible.builtin.package: name=apache2 state=present
         - name: Ensure Apache is not running (Debian).
-          service: name=apache2 state=stopped enabled=no
+          ansible.builtin.service: name=apache2 state=stopped enabled=no
       when: ansible_os_family == 'Debian'
 
     - name: Create a test HTML file to load.
-      copy:
+      ansible.builtin.copy:
         content: "<html><head><title>Test</title></head><body>Test.</body></html>"
         dest: /var/www/html/index.html
         force: false
@@ -45,17 +45,17 @@
 
     # Add Apache to supervisor_programs.
     - name: Set Apache start command (Debian).
-      set_fact:
+      ansible.builtin.set_fact:
         apache_start_command: apache2ctl -DFOREGROUND
       when: ansible_os_family == 'Debian'
 
     - name: Set Apache start command (RedHat).
-      set_fact:
+      ansible.builtin.set_fact:
         apache_start_command: httpd -DFOREGROUND
       when: ansible_os_family == 'RedHat'
 
     - name: Add Apache to supervisor_programs.
-      set_fact:
+      ansible.builtin.set_fact:
         supervisor_programs:
           - name: 'apache'
             command: "{{ apache_start_command }}"
@@ -78,22 +78,22 @@
 
   tasks:
     - name: Trigger handlers so supervisor runs everything it should run.
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
 
   post_tasks:
     - name: Wait for Apache to come up (if it's going to do so...).
-      wait_for:
+      ansible.builtin.wait_for:
         port: 80
         delay: 2
 
     - name: Verify Apache is responding on port 80.
-      uri:
+      ansible.builtin.uri:
         url: http://127.0.0.1/
         method: GET
         status_code: 200
 
     - name: Verify supervisorctl is available.
-      command: supervisorctl --help
+      ansible.builtin.command: supervisorctl --help
       changed_when: false
 
     - name: Validate supervisorctl works through the default UNIX socket.
@@ -105,5 +105,5 @@
       changed_when: false
 
     - name: Validate supervisorctl works with unix socket
-      command: supervisorctl status
+      ansible.builtin.command: supervisorctl status
       changed_when: false
