@@ -42,6 +42,7 @@ jobs:
     strategy:
       matrix:
         include:
+          # TODO: consider rockylinux9 for testing
           - distro: rockylinux8
             playbook: converge.yml
           - distro: ubuntu2204
