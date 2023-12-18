@@ -12,26 +12,49 @@
 
   pre_tasks:
     - name: Update apt cache (Debian).
-      ansible.builtin.apt: update_cache=true cache_valid_time=600
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
       when: ansible_os_family == 'Debian'
 
     # Install curl for test purposes.
+    - name: Remove curl-minimal package before full curl install.
+      ansible.builtin.package:
+        name: curl-minimal
+        state: absent
+
     - name: Install curl for testing purposes.
-      ansible.builtin.package: name=curl state=present
+      ansible.builtin.package:
+        name: curl
+        state: present
 
     # Install Apache for test purposes.
     - block:
         - name: Install Apache (RedHat).
-          ansible.builtin.package: name=httpd state=present
+          ansible.builtin.package:
+            name: httpd
+            state: present
+
         - name: Ensure Apache is not running (RedHat).
-          ansible.builtin.service: name=httpd state=stopped enabled=no
+          ansible.builtin.service:
+            name: httpd
+            state: stopped
+            enabled: no
+
       when: ansible_os_family == 'RedHat'
 
     - block:
         - name: Install Apache (Debian).
-          ansible.builtin.package: name=apache2 state=present
+          ansible.builtin.package:
+            name: apache2
+            state: present
+
         - name: Ensure Apache is not running (Debian).
-          ansible.builtin.service: name=apache2 state=stopped enabled=no
+          ansible.builtin.service:
+            name: apache2
+            state: stopped
+            enabled: no
+
       when: ansible_os_family == 'Debian'
 
     - name: Create a test HTML file to load.
