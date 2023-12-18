@@ -28,34 +28,33 @@
         name: curl
         state: present
 
-    # Install Apache for test purposes.
-    - block:
-        - name: Install Apache (RedHat).
-          ansible.builtin.package:
-            name: httpd
-            state: present
-
-        - name: Ensure Apache is not running (RedHat).
-          ansible.builtin.service:
-            name: httpd
-            state: stopped
-            enabled: no
-
+    - name: Install and stop Apache for RedHat
       when: ansible_os_family == 'RedHat'
+      block:
+        - name: Install Apache (RedHat)
+          ansible.builtin.package:
+            name: httpd
+            state: present
 
-    - block:
-        - name: Install Apache (Debian).
+        - name: Ensure Apache is not running (RedHat)
+          ansible.builtin.service:
+            name: httpd
+            state: stopped
+            enabled: no
+
+    - name: Install and stop Apache for Debian
+      when: ansible_os_family == 'Debian'
+      block:
+        - name: Install Apache (Debian)
           ansible.builtin.package:
             name: apache2
             state: present
 
-        - name: Ensure Apache is not running (Debian).
+        - name: Ensure Apache is not running (Debian)
           ansible.builtin.service:
             name: apache2
             state: stopped
             enabled: no
-
-      when: ansible_os_family == 'Debian'
 
     - name: Create a test HTML file to load.
       ansible.builtin.copy:
@@ -120,7 +119,7 @@
       changed_when: false
 
     - name: Validate supervisorctl works through the default UNIX socket.
-      supervisorctl:
+      community.general.supervisorctl:
         name: apache
         state: restarted
         username: "{{ supervisor_user }}"
