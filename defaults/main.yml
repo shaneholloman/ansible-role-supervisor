@@ -13,7 +13,7 @@ supervisor_config_path: /etc/supervisor
 supervisor_programs: []
 
 # - name: 'apache'
-#   ansible.builtin.command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
+#   command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
 #   state: present
 #   configuration: |
 #     autostart=true

@@ -80,7 +80,7 @@
       ansible.builtin.set_fact:
         supervisor_programs:
           - name: 'apache'
-            ansible.builtin.command: "{{ apache_start_command }}"
+            command: "{{ apache_start_command }}"
             state: present
             configuration: |
               autostart=true
