@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: 0755
+    mode: '0755'
     owner: root
     group: root
   loop:
@@ -14,7 +14,7 @@
   ansible.builtin.template:
     src: supervisord.conf.j2
     dest: "{{ supervisor_config_path }}/supervisord.conf"
-    mode: 0644
+    mode: '0644'
   notify: Restart supervisor
 
 - name: Ensure Supervisor program configs are present.
@@ -24,7 +24,7 @@
     force: true
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   when: item.state|default('present') != 'absent'
   loop: "{{ supervisor_programs }}"
   notify: Restart supervisor

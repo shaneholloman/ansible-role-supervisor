@@ -27,11 +27,11 @@ The path where Supervisor configuration should be stored.
 
     supervisor_programs:
       - name: 'foo'
-        command: /bin/cat
+        ansible.builtin.command: /bin/cat
         state: present
 
       - name: 'apache'
-        command: apache2ctl -DFOREGROUND
+        ansible.builtin.command: apache2ctl -DFOREGROUND
         state: present
         configuration: |
           autostart=true

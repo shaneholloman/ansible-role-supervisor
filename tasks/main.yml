@@ -15,7 +15,7 @@
   ansible.builtin.file:
     path: "{{ supervisor_log_dir }}"
     state: directory
-    mode: 0755
+    mode: '0755'
 
 - name: Include config tasks
   ansible.builtin.include_tasks: config.yml

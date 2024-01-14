@@ -63,7 +63,7 @@
         force: false
         group: root
         owner: root
-        mode: 0644
+        mode: '0644'
 
     # Add Apache to supervisor_programs.
     - name: Set Apache start command (Debian).
@@ -80,7 +80,7 @@
       ansible.builtin.set_fact:
         supervisor_programs:
           - name: 'apache'
-            command: "{{ apache_start_command }}"
+            ansible.builtin.command: "{{ apache_start_command }}"
             state: present
             configuration: |
               autostart=true
