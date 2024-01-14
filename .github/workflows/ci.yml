@@ -45,7 +45,7 @@ jobs:
           # TODO: consider rockylinux9 for testing as it fails at this time
           - distro: rockylinux8
             playbook: converge.yml
-          - distro: rockylinux8
+          - distro: rockylinux9
             playbook: converge.yml
           - distro: ubuntu2204
             playbook: converge.yml
