@@ -43,7 +43,7 @@ jobs:
       matrix:
         include:
           # TODO: consider rockylinux9 for testing
-          - distro: rockylinux8
+          - distro: rockylinux9
             playbook: converge.yml
           - distro: ubuntu2204
             playbook: converge.yml
