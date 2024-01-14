@@ -42,7 +42,7 @@ jobs:
     strategy:
       matrix:
         include:
-          # TODO: consider rockylinux9 for testing as it fails at this time
+          # TODO: rockylinux9 builds fine in CI, but I haven't used it in production yet
           - distro: rockylinux8
             playbook: converge.yml
           - distro: rockylinux9
