@@ -1,14 +1,12 @@
 ---
-dependencies: []
-
 galaxy_info:
   role_name: supervisor
   author: shaneholloman
   description: Supervisor (process state manager) for Linux.
-  issue_tracker_url: https://github.com/shaneholloman/ansible-role-supervisor/issues
   company: "shaneholloman"
   license: "license (Unlicense)"
-  min_ansible_version: "2.10"
+  min_ansible_version: "2.12"
+
   platforms:
     - name: Fedora
       versions:
@@ -19,6 +17,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - all
+
   galaxy_tags:
     - system
     - server
@@ -28,3 +27,5 @@ galaxy_info:
     - manager
     - init
     - docker
+
+dependencies: []
